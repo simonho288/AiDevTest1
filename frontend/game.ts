@@ -25,13 +25,29 @@ function preload(this: Phaser.Scene): void {
 
 let score = 0;
 let scoreText: Phaser.GameObjects.Text;
+let helloText: Phaser.GameObjects.Text;
+let background: Phaser.GameObjects.Image;
 
 function create(this: Phaser.Scene): void {
-    this.add.image(this.cameras.main.width / 2, this.cameras.main.height / 2, 'sky');
+    background = this.add.image(this.cameras.main.width / 2, this.cameras.main.height / 2, 'sky');
     
-    scoreText = this.add.text(16, 16, 'Score: 0', { fontSize: '32px', fill: '#000' });
+    scoreText = this.add.text(16, 16, 'Score: 0', { fontSize: '32px', color: '#000' });
     
+    // Add 'Hello, world' text to the center of the screen
+    helloText = this.add.text(this.cameras.main.width / 2, this.cameras.main.height / 2, 'Hello, world', {
+        fontSize: '48px',
+        color: '#fff',
+        fontStyle: 'bold'
+    }).setOrigin(0.5);
     // Create game objects and logic here
+
+    // Listen for resize events and reposition objects
+    this.scale.on('resize', (gameSize: Phaser.Structs.Size) => {
+        const width = gameSize.width;
+        const height = gameSize.height;
+        background.setPosition(width / 2, height / 2);
+        helloText.setPosition(width / 2, height / 2);
+    });
 }
 
 function update(this: Phaser.Scene): void {
