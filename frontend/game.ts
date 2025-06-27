@@ -52,6 +52,6 @@ function create(this: Phaser.Scene): void {
 
 function update(this: Phaser.Scene): void {
     // Game logic that runs every frame
-    score += 1;
+    // score += 1; // Counter stopped as per issue #3
     scoreText.setText('Score: ' + score);
 }
